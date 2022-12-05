@@ -1,5 +1,7 @@
 #!/bin/bash   
 
+## Version 1.3.1
+
 ## Common variables
 SPEED=450000
 LOGDIR=/Users/ole/scripts/logs
