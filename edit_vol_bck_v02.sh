@@ -27,12 +27,10 @@ for VOL in $VOLS; do
    mkdir -p /Volumes/temp/scn_backup/$VOL
    rsync -rltvhq --stats --bwlimit=$SPEED --exclude-from=/Users/ole/scripts/edit_rsync_exclude /Volumes/$VOL/editorial/project /Volumes/temp/scn_backup/$VOL/$STODAY >> $LOGF
    echo "" >> $LOGF
-   sync
    pushd /Volumes/temp/scn_backup/
-   #chmod -R 777 .
+   chmod -R 777 .
    zip -qrmDT $VOL/"$STODAY"_"$VOL" $VOL/$STODAY >> $LOGF
    rm -r $VOL/$STODAY
-   popd
    echo "" >> $LOGF
    sync
 
