@@ -23,7 +23,7 @@ echo "" >> $LOGF
 mkdir -p /Volumes/temp/scn_backup/$VOL
 
 ## The actual backup
-VOLS=`cat /Users/ole/scripts/edit_vol_list.txt` #List of volumes to back up from edit_vol_list.txt
+VOLS=`cat /Users/ole/projects/git/scn_editvol_bck/edit_vol_list.txt` #List of volumes to back up from edit_vol_list.txt
 for VOL in $VOLS; do
 	echo "" >> $LOGF
 	echo "backup of $VOL starts now..." >> $LOGF
