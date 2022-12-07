@@ -1,6 +1,6 @@
 #!/bin/bash   
 
-## Version 1.4.1
+## Version 1.4.2
 
 ## Common variables
 LOGDIR=/Users/ole/scripts/logs
@@ -10,7 +10,7 @@ LOGF=$LOGDIR/edit_vol_bck_$TODAY.log
 EXCLUDE_LIST=/Users/ole/projects/git/scn_editvol_bck/edit_rsync_exclude.txt
 EMAIL_ADRESS=ole@shortcutoslo.no
 DEST=/Volumes/temp/scn_backup
-VOLS=`mount | grep "_edit" | awk '{print substr($3, 10)}'`
+VOLS=`mount | grep "_edit" | awk '{print substr($3, 10)}'` #This list backs up all network disks with the name _edit
 
 ## Script it baby!
 
@@ -26,7 +26,6 @@ echo "" >> $LOGF
 mkdir -p $DEST/$VOL
 
 ## The actual backup
- #List of volumes to back up from edit_vol_list.txt
 for VOL in $VOLS; do
 	echo "" >> $LOGF
 	echo "backup of $VOL starts now..." >> $LOGF
