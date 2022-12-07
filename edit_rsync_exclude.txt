@@ -22,5 +22,8 @@ TheVolumeSettingsFolder
 *.zip
 *.tar
 *.rar
-
+*.mp4
+*.mov
+*.wav
+*.cfa
 

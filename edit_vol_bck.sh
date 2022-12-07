@@ -9,7 +9,7 @@ TODAY="$(date '+%y%m%d_%H%M')"
 STODAY="$(date '+%y%m%d')"
 LOGF=$LOGDIR/edit_vol_bck_$TODAY.log
 EMAIL_ADRESS=ole@shortcutoslo.no
-EXCLUDE_LIST=/Users/ole/projects/git/scn-projectbackup/edit_rsync_exclude
+EXCLUDE_LIST=/Users/ole/projects/git/scn_editvol_bck/edit_rsync_exclude.txt
 
 ## Script it baby!
 
@@ -32,9 +32,9 @@ for VOL in $VOLS; do
 
 	# Create destination folder 
 	mkdir -p /Volumes/temp/scn_backup/$VOL
-	
+
 	# tar it off Facilis
-	tar --exclude="*.pat" --exclude="*.awf" --exclude="*.zip" --exclude="*.mp4" --exclude="*.mov" --exclude="*/SearchData/" --exclude="*/WaveformCache/" -czvf /Volumes/temp/scn_backup/$VOL/$STODAY"_"$VOL.tar -C "/Volumes/$VOL/editorial/project/" . >> $LOGF
+	tar --exclude="*.lck" --exclude="*.prlock" --exclude="*.pat" --exclude="*.awf" --exclude="*.zip" --exclude="*.mp4" --exclude="*.mov" --exclude="*.wav" --exclude="*.cfa" --exclude="*/SearchData/" --exclude="*/WaveformCache/"  -czvf /Volumes/temp/scn_backup/$VOL/$STODAY"_"$VOL.tar -C "/Volumes/$VOL/editorial/project/" . >> $LOGF
 
 	echo "" >> $LOGF
 
