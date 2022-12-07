@@ -18,7 +18,7 @@ echo "" >> $LOGF
 
 echo "" >> $LOGF
 echo "List of volumes to be backed up" >> $LOGF
-cat /Users/ole/scripts/edit_vol_list.txt >> $LOGF
+cat /Users/ole/projects/git/scn_editvol_bck/edit_vol_list.txt >> $LOGF
 echo "" >> $LOGF
 
 ## Create destination folder
@@ -29,35 +29,16 @@ VOLS=`cat /Users/ole/projects/git/scn_editvol_bck/edit_vol_list.txt` #List of vo
 for VOL in $VOLS; do
 	echo "" >> $LOGF
 	echo "backup of $VOL starts now..." >> $LOGF
-	
+
 	# Create destination folder 
 	mkdir -p /Volumes/temp/scn_backup/$VOL
 	
-	# Sync it off Facilis
-	rsync -ahq --progress --stats --exclude-from=$EXCLUDE_LIST --bwlimit=$SPEED /Volumes/$VOL/editorial/project /Volumes/temp/scn_backup/$VOL/$STODAY  >> $LOGF 
-
-	# Make a zipped backup
-	pushd /Volumes/temp/scn_backup/$VOL   
-	zip -r -q -T -m -9 "$STODAY"_"$VOL".zip $STODAY >> $LOGF
-	popd
+	# tar it off Facilis
+	tar --exclude="*.pat" --exclude="*.awf" --exclude="*.zip" --exclude="*.mp4" --exclude="*.mov" --exclude="*/SearchData/" --exclude="*/WaveformCache/" -czvf /Volumes/temp/scn_backup/$VOL/$STODAY"_"$VOL.tar -C "/Volumes/$VOL/editorial/project/" . >> $LOGF
 
 	echo "" >> $LOGF
 
 done
-
-## Explination of the syntax
-
-# zip -r -q -T -m
-
-# -r: Recursively traverse any subdirectories (including compressed archives) and add the contents of those directories to the ZIP archive.
-
-# -q: Quiet mode. Suppress any output messages.
-
-# -T: Test the integrity of the compressed files.
-
-# -m: Move files into the ZIP archive instead of copying them. This will delete the original files after they have been added to the archive.
-
-
 
 ## Some sexy reports
  echo "Size of backups" >> $LOGF

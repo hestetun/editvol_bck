@@ -1,0 +1,7 @@
+*.pyc
+*#*
+*~
+*.nja
+*.*~
+.DS_Store
+build/

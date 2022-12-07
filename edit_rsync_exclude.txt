@@ -14,9 +14,13 @@ TheVolumeSettingsFolder
 *.tmp
 .*/lost\+found/.*
 .manquota
-WaveformCache
-SearchData
+./WaveformCache/
+./SearchData/
 *.lck
+*.awf
+*.pat
 *.zip
 *.tar
 *.rar
+
+

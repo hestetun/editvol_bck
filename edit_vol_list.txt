@@ -1,2 +1,3 @@
-julestjerna_edit
-olsenbanden_edit
+royalteen_edit
+skomakergata_edit
+svartegutter_edit
