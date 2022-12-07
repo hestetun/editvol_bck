@@ -10,6 +10,7 @@ LOGF=$LOGDIR/edit_vol_bck_$TODAY.log
 EXCLUDE_LIST=/Users/ole/projects/git/scn_editvol_bck/edit_rsync_exclude.txt
 EMAIL_ADRESS=ole@shortcutoslo.no
 DEST=/Volumes/temp/scn_backup
+VOLS=`mount | grep "_edit" | awk '{print substr($3, 10)}'`
 
 ## Script it baby!
 
@@ -18,14 +19,14 @@ echo "" >> $LOGF
 
 echo "" >> $LOGF
 echo "List of volumes to be backed up" >> $LOGF
-mount | grep "_edit" | awk '{print substr($3, 10)}' >> $LOGF #List
+echo "$VOLS" >> $LOGF #List
 echo "" >> $LOGF
 
 ## Create destination folder
 mkdir -p $DEST/$VOL
 
 ## The actual backup
-VOLS=`mount | grep "_edit" | awk '{print substr($3, 10)}'` #List of volumes to back up from edit_vol_list.txt
+ #List of volumes to back up from edit_vol_list.txt
 for VOL in $VOLS; do
 	echo "" >> $LOGF
 	echo "backup of $VOL starts now..." >> $LOGF
