@@ -4,9 +4,9 @@
 
 ## Common variables
 LOGDIR=/Users/ole/scripts/logs
-LOGF=$LOGDIR/edit_vol_bck_$TODAY.log
 TODAY="$(date '+%y%m%d_%H%M')"
 STODAY="$(date '+%y%m%d')"
+LOGF=$LOGDIR/edit_vol_bck_$TODAY.log
 EXCLUDE_LIST=/Users/ole/projects/git/scn_editvol_bck/edit_rsync_exclude.txt
 EMAIL_ADRESS=ole@shortcutoslo.no
 DEST=/Volumes/temp/scn_backup
