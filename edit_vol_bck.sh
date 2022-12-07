@@ -18,7 +18,7 @@ echo "" >> $LOGF
 
 echo "" >> $LOGF
 echo "List of volumes to be backed up" >> $LOGF
-eval "$VOL" >> $LOGF #List
+mount | grep "_edit" | awk '{print substr($3, 10)}' >> $LOGF #List
 echo "" >> $LOGF
 
 ## Create destination folder
