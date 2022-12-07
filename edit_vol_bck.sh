@@ -34,7 +34,7 @@ for VOL in $VOLS; do
 	mkdir -p $DEST/$VOL
 
 	# tar it off Facilis
-	tar --exclude="*.lck" --exclude="*.prlock" --exclude="*.pat" --exclude="*.awf" --exclude="*.zip" --exclude="*.mp4" --exclude="*.mov" --exclude="*.wav" --exclude="*.cfa" --exclude="*/SearchData/" --exclude="*/WaveformCache/"  -czvf $DEST/$VOL/$STODAY"_"$VOL.tar -C "/Volumes/$VOL/editorial/project/" . >> $LOGF
+	tar --exclude="*.lck" --exclude="*.prlock" --exclude="*.pat" --exclude="*.awf" --exclude="*.zip" --exclude="*.mp4" --exclude="*.mov" --exclude="*.wav" --exclude="*.cfa" --exclude="*/SearchData/" --exclude="*/WaveformCache/" -czvf $DEST/$VOL/$STODAY"_"$VOL.tar -C "/Volumes/$VOL/editorial/project/" . >> $LOGF
 
 	echo "" >> $LOGF
 
@@ -42,7 +42,7 @@ done
 
 ## Some sexy reports
  echo "Size of backups" >> $LOGF
-   du -shc $DEST/* | sort -n >> $LOGF
+   du -sh $DEST/* | sort -h >> $LOGF
    echo "" >> $LOGF
    echo "Size of volumes" >> $LOGF
    df -h | grep _edit >> $LOGF
