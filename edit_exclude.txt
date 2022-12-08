@@ -19,6 +19,7 @@ TheVolumeSettingsFolder
 *Video\ Previews
 *Audio\ Previews
 *Captured*
+HARD*
 *.prlock
 *.lck
 *.awf
