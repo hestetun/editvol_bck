@@ -28,7 +28,7 @@ mkdir -p $DEST/$VOL
 ## The actual backup
 for VOL in $VOLS; do
 	echo "" >> $LOGF
-	echo "backup of $VOL starts now..." >> $LOGF
+	echo "backup of $VOL starts now $TODAY..." >> $LOGF
 
 	# Create destination folder 
 	mkdir -p $DEST/$VOL
