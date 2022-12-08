@@ -1,15 +1,15 @@
 #!/bin/bash   
 
-## Version 1.4.2
+## Version 1.4.3
 
 ## Common variables
-LOGDIR=/Users/ole/scripts/logs
+DEST=/Volumes/temp/_edit_backs
 TODAY="$(date '+%y%m%d_%H%M')"
 STODAY="$(date '+%y%m%d')"
+LOGDIR=~/Library/Logs
 LOGF=$LOGDIR/edit_vol_bck_$TODAY.log
-EXCLUDE_LIST=/Users/ole/projects/git/scn_editvol_bck/edit_rsync_exclude.txt
-EMAIL_ADRESS=ole@shortcutoslo.no
-DEST=/Volumes/temp/scn_backup
+EXCLUDE_LIST=/Users/systeminstaller/git/scn_editvol_bck/edit_exclude.txt
+EMAIL_ADRESS=scntech@shortcutoslo.no
 VOLS=`mount | grep "_edit" | awk '{print substr($3, 10)}'` #This list backs up all network disks with the name _edit
 
 ## Script it baby!
@@ -34,7 +34,7 @@ for VOL in $VOLS; do
 	mkdir -p $DEST/$VOL
 
 	# tar it off Facilis
-	tar --exclude="*.lck" --exclude="*.prlock" --exclude="*.pat" --exclude="*.awf" --exclude="*.zip" --exclude="*.mp4" --exclude="*.mov" --exclude="*.wav" --exclude="*.cfa" --exclude="*/SearchData/" --exclude="*/WaveformCache/" -czvf $DEST/$VOL/$STODAY"_"$VOL.tar -C "/Volumes/$VOL/editorial/project/" . >> $LOGF
+	tar --exclude-from $EXCLUDE_LIST -czvf $DEST/$VOL/$STODAY"_"$VOL.tar -C "/Volumes/$VOL/editorial/project/" . >> $LOGF
 
 	echo "" >> $LOGF
 

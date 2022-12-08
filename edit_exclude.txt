@@ -14,8 +14,12 @@ TheVolumeSettingsFolder
 *.tmp
 .*/lost\+found/.*
 .manquota
-./WaveformCache/
-./SearchData/
+*WaveformCache*
+*SearchData*
+*Video\ Previews
+*Audio\ Previews
+*Captured*
+*.prlock
 *.lck
 *.awf
 *.pat
@@ -26,4 +30,5 @@ TheVolumeSettingsFolder
 *.mov
 *.wav
 *.cfa
+
 
