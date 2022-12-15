@@ -17,6 +17,10 @@ VOLS=`mount | grep "_edit" | awk '{print substr($3, 10)}'` #This list backs up a
 echo "Backup started on $HOSTNAME on $TODAY" >> $LOGF
 echo "" >> $LOGF
 
+# Delete staging copies
+echo "Cleaning up staging area" >> $LOGF
+rm -ri $DEST/*
+
 echo "" >> $LOGF
 echo "List of volumes to be backed up" >> $LOGF
 echo "$VOLS" >> $LOGF #List
@@ -47,15 +51,12 @@ done
    echo "Size of volumes" >> $LOGF
    df -h | grep _edit >> $LOGF
 
+# Sync archives from staging to whiterabbit
+rsync -rltvh --stats $DEST/* systeminstaller@scnfile02:/Volumes/whiterabbit/zz_scn_edit_bu/ >> $LOGF
+
 echo "" >> $LOGF
 echo "Backup is done... " >> $LOGF
 cat $LOGF
-
-# Sync archives from staging to whiterabbit
-rsync -rltvh --stats $DEST/* systeminstaller@scnfile02:/Volumes/whiterabbit/zz_scn_edit_bu/
-
-# Delete staging copies
-rm -ri $DEST/*
 
 ## Sending log to email recipients
 /opt/homebrew/bin/mutt -s "Backup $TODAY - log for edit disks" $EMAIL_ADRESS < $LOGF
