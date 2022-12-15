@@ -1,6 +1,6 @@
 #!/bin/bash   
 
-## Version 1.4.4
+## Version 1.4.5
 
 ## Common variables
 DEST=/Volumes/temp/_edit_backs
@@ -52,6 +52,7 @@ done
    df -h | grep _edit >> $LOGF
 
 # Sync archives from staging to whiterabbit
+echo "" >> $LOGF
 rsync -rltvh --stats $DEST/* systeminstaller@scnfile02:/Volumes/whiterabbit/zz_scn_edit_bu/ >> $LOGF
 
 echo "" >> $LOGF
