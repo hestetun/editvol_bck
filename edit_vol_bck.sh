@@ -51,5 +51,11 @@ echo "" >> $LOGF
 echo "Backup is done... " >> $LOGF
 cat $LOGF
 
+# Sync archives from staging to whiterabbit
+rsync -rltvh --stats $DEST/* systeminstaller@scnfile02:/Volumes/whiterabbit/zz_scn_edit_bu/
+
+# Delete staging copies
+rm -ri $DEST/*
+
 ## Sending log to email recipients
 /opt/homebrew/bin/mutt -s "Backup $TODAY - log for edit disks" $EMAIL_ADRESS < $LOGF
