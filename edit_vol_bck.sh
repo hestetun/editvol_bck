@@ -1,6 +1,6 @@
 #!/bin/bash   
 
-## Version 1.4.3
+## Version 1.4.4
 
 ## Common variables
 DEST=/Volumes/temp/_edit_backs
@@ -8,7 +8,7 @@ TODAY="$(date '+%y%m%d_%H%M')"
 STODAY="$(date '+%y%m%d')"
 LOGDIR=~/Library/Logs
 LOGF=$LOGDIR/edit_vol_bck_$TODAY.log
-EXCLUDE_LIST=/Users/systeminstaller/git/scn_editvol_bck/edit_exclude.txt
+EXCLUDE_LIST=~/git/editvol_bck/edit_exclude.txt
 EMAIL_ADRESS=scntech@shortcutoslo.no
 VOLS=`mount | grep "_edit" | awk '{print substr($3, 10)}'` #This list backs up all network disks with the name _edit
 
