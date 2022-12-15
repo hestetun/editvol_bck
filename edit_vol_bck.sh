@@ -19,7 +19,7 @@ echo "" >> $LOGF
 
 # Delete staging copies
 echo "Cleaning up staging area" >> $LOGF
-rm -ri $DEST/*
+rm -rf $DEST/* >> $LOGF
 
 echo "" >> $LOGF
 echo "List of volumes to be backed up" >> $LOGF
