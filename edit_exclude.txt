@@ -20,6 +20,8 @@ TheVolumeSettingsFolder
 *Audio\ Previews
 *Captured*
 HARD*
+AvidSharedData
+*.log
 *.prlock
 *.lck
 *.awf
