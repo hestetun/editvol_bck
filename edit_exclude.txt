@@ -31,5 +31,8 @@ HARD*
 *.mov
 *.wav
 *.cfa
-
-
+*.png
+*.jpg
+*.exr
+*.psd
+*.ai
