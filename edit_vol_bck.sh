@@ -1,5 +1,5 @@
 #!/bin/bash   
-## Version 1.5.0	
+## Version 1.5.1	
 
 ## command variables
 TAR=/usr/bin/tar
@@ -25,6 +25,10 @@ EXCLUDE_LIST=~/git/editvol_bck/edit_exclude.txt
 EMAIL_ADRESS=scntech@shortcutoslo.no
 VOLS=`mount | $GREP "_edit" | $AWK '{print substr($3, 10)}'` # this list backs up all network disks with the name _edit
 
+## Script it baby!
+echo "Backup started on $HOSTNAME on $TODAY" >> $LOGF
+echo "" >> $LOGF
+
 ## Self test - check if commands exist
 for cmd in $TAR $RM $DU $DF $RSYNC $CAT $MKDIR $AWK $GREP $SORT $MUTT
 do
@@ -35,11 +39,8 @@ do
 done
 
 echo "Self-check passed. All necessary commands are installed." >> $LOGF
-
-## Script it baby!
-
-echo "Backup started on $HOSTNAME on $TODAY" >> $LOGF
 echo "" >> $LOGF
+
 
 # Delete staging copies
 echo "Cleaning up staging area" >> $LOGF
