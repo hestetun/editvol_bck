@@ -1,6 +1,6 @@
 #!/bin/bash   
-
 ## Version 1.5.0	
+
 ## command variables
 TAR=/usr/bin/tar
 RM=/bin/rm
@@ -22,7 +22,7 @@ LOGDIR=~/Library/Logs/
 $MKDIR -p $LOGDIR/editvol_bck # this line creates the directory if it does not exist
 LOGF=$LOGDIR/editvol_bck/edit_vol_bck_$TODAY.log
 EXCLUDE_LIST=~/git/editvol_bck/edit_exclude.txt
-EMAIL_ADRESS=ole@shortcutoslo.no
+EMAIL_ADRESS=scntech@shortcutoslo.no
 VOLS=`mount | $GREP "_edit" | $AWK '{print substr($3, 10)}'` # this list backs up all network disks with the name _edit
 
 ## Self test - check if commands exist
