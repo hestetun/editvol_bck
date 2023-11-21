@@ -1,16 +1,40 @@
 #!/bin/bash   
 
-## Version 1.4.5
+## Version 1.5.0	
+## command variables
+TAR=/usr/bin/tar
+RM=/bin/rm
+DU=/usr/bin/du
+DF=/bin/df
+RSYNC=/opt/homebrew/bin/rsync
+CAT=/bin/cat
+MKDIR=/bin/mkdir
+AWK=/usr/bin/awk
+GREP=/usr/bin/grep
+SORT=/usr/bin/sort
+MUTT=/opt/homebrew/bin/mutt
 
 ## Common variables
 DEST=/Volumes/temp/_edit_backs
 TODAY="$(date '+%y%m%d_%H%M')"
 STODAY="$(date '+%y%m%d')"
-LOGDIR=~/Library/Logs
-LOGF=$LOGDIR/edit_vol_bck_$TODAY.log
+LOGDIR=~/Library/Logs/
+$MKDIR -p $LOGDIR/editvol_bck # this line creates the directory if it does not exist
+LOGF=$LOGDIR/editvol_bck/edit_vol_bck_$TODAY.log
 EXCLUDE_LIST=~/git/editvol_bck/edit_exclude.txt
-EMAIL_ADRESS=scntech@shortcutoslo.no
-VOLS=`mount | grep "_edit" | awk '{print substr($3, 10)}'` #This list backs up all network disks with the name _edit
+EMAIL_ADRESS=ole@shortcutoslo.no
+VOLS=`mount | $GREP "_edit" | $AWK '{print substr($3, 10)}'` # this list backs up all network disks with the name _edit
+
+## Self test - check if commands exist
+for cmd in $TAR $RM $DU $DF $RSYNC $CAT $MKDIR $AWK $GREP $SORT $MUTT
+do
+   if ! [ -x "$(command -v $cmd)" ]; then
+      echo "Error: $cmd is not installed." >> $LOGF
+      exit 1
+   fi
+done
+
+echo "Self-check passed. All necessary commands are installed." >> $LOGF
 
 ## Script it baby!
 
@@ -19,45 +43,42 @@ echo "" >> $LOGF
 
 # Delete staging copies
 echo "Cleaning up staging area" >> $LOGF
-rm -rfv $DEST/* >> $LOGF
+$RM -rfv $DEST/* >> $LOGF
 
 echo "" >> $LOGF
 echo "List of volumes to be backed up" >> $LOGF
 echo "$VOLS" >> $LOGF #List
 echo "" >> $LOGF
 
-## Create destination folder
-mkdir -p $DEST/$VOL
-
 ## The actual backup
 for VOL in $VOLS; do
-	echo "" >> $LOGF
-	echo "backup of $VOL starts now $TODAY..." >> $LOGF
+    echo "" >> $LOGF
+    echo "backup of $VOL starts now $TODAY..." >> $LOGF
 
-	# Create destination folder 
-	mkdir -p $DEST/$VOL
+    # Create destination folder 
+    $MKDIR -p $DEST/$VOL
 
-	# tar it off Facilis
-	tar --exclude-from $EXCLUDE_LIST -czvf $DEST/$VOL/$STODAY"_"$VOL.tar -C "/Volumes/$VOL/editorial/project/" . >> $LOGF
+    # tar it off Facilis
+    $TAR --exclude-from $EXCLUDE_LIST -czvf $DEST/$VOL/$STODAY"_"$VOL.tar -C "/Volumes/$VOL/editorial/project/" . >> $LOGF
 
-	echo "" >> $LOGF
+    echo "" >> $LOGF
 
 done
 
 ## Some sexy reports
  echo "Size of backups" >> $LOGF
-   du -sh $DEST/* | sort -h >> $LOGF
-   echo "" >> $LOGF
-   echo "Size of volumes" >> $LOGF
-   df -h | grep _edit >> $LOGF
+ $DU -sh $DEST/* | $SORT -h >> $LOGF
+ echo "" >> $LOGF
+ echo "Size of volumes" >> $LOGF
+ $DF -h | $GREP _edit >> $LOGF
 
 # Sync archives from staging to whiterabbit
 echo "" >> $LOGF
-rsync -rltvh --stats $DEST/* systeminstaller@scnfile02:/Volumes/whiterabbit/zz_scn_edit_bu/ >> $LOGF
+$RSYNC -rltvh --stats $DEST/* systeminstaller@scnfile02:/Volumes/whiterabbit/zz_scn_edit_bu/ >> $LOGF
 
 echo "" >> $LOGF
 echo "Backup is done... " >> $LOGF
-cat $LOGF
+$CAT $LOGF
 
 ## Sending log to email recipients
-/opt/homebrew/bin/mutt -s "Backup $TODAY - log for edit disks" $EMAIL_ADRESS < $LOGF
+$MUTT -s "Backup $TODAY - log for edit disks" $EMAIL_ADRESS < $LOGF
