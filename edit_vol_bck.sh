@@ -1,5 +1,5 @@
 #!/bin/bash   
-## Version 1.5.1	
+## Version 1.5.2	
 
 ## command variables
 TAR=/usr/bin/tar
@@ -16,7 +16,7 @@ if [[ -f /opt/homebrew/bin/mutt ]]; then
 elif [[ -f /usr/local/bin/mutt ]]; then
     RSYNC=/usr/local/bin/mutt
 else
-    echo "mutt not found!"
+    echo "mutt not found!" >> $LOGF
     exit 1
 fi
 if [[ -f /opt/homebrew/bin/rsync ]]; then
@@ -24,7 +24,7 @@ if [[ -f /opt/homebrew/bin/rsync ]]; then
 elif [[ -f /usr/local/bin/rsync ]]; then
     RSYNC=/usr/local/bin/rsync
 else
-    echo "rsync not found!"
+    echo "rsync not found!" >> $LOGF
     exit 1
 fi
 
