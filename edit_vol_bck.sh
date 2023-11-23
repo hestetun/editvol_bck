@@ -6,13 +6,25 @@ TAR=/usr/bin/tar
 RM=/bin/rm
 DU=/usr/bin/du
 DF=/bin/df
-RSYNC=/opt/homebrew/bin/rsync
 CAT=/bin/cat
 MKDIR=/bin/mkdir
 AWK=/usr/bin/awk
 GREP=/usr/bin/grep
 SORT=/usr/bin/sort
-MUTT=/opt/homebrew/bin/mutt
+if [[ -f /opt/homebrew/bin/mutt ]]; then
+    MUTT=/opt/homebrew/bin/mutt
+elif [[ -f /usr/local/bin/mutt ]]; then
+    RSYNC=/usr/local/bin/mutt
+else
+    echo "mutt not found!"
+fi
+if [[ -f /opt/homebrew/bin/rsync ]]; then
+    RSYNC=/opt/homebrew/bin/rsync
+elif [[ -f /usr/local/bin/rsync ]]; then
+    RSYNC=/usr/local/bin/rsync
+else
+    echo "rsync not found!"
+fi
 
 ## Common variables
 DEST=/Volumes/temp/_edit_backs
