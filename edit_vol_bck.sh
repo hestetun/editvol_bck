@@ -17,6 +17,7 @@ elif [[ -f /usr/local/bin/mutt ]]; then
     RSYNC=/usr/local/bin/mutt
 else
     echo "mutt not found!"
+    exit 1
 fi
 if [[ -f /opt/homebrew/bin/rsync ]]; then
     RSYNC=/opt/homebrew/bin/rsync
@@ -24,6 +25,7 @@ elif [[ -f /usr/local/bin/rsync ]]; then
     RSYNC=/usr/local/bin/rsync
 else
     echo "rsync not found!"
+    exit 1
 fi
 
 ## Common variables
