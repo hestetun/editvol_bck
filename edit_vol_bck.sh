@@ -1,5 +1,5 @@
 #!/bin/bash   
-## Version 1.5.2	
+version="1.5.3"	
 
 ## command variables
 TAR=/usr/bin/tar
@@ -11,10 +11,11 @@ MKDIR=/bin/mkdir
 AWK=/usr/bin/awk
 GREP=/usr/bin/grep
 SORT=/usr/bin/sort
+
 if [[ -f /opt/homebrew/bin/mutt ]]; then
     MUTT=/opt/homebrew/bin/mutt
 elif [[ -f /usr/local/bin/mutt ]]; then
-    RSYNC=/usr/local/bin/mutt
+    MUTT=/usr/local/bin/mutt
 else
     echo "mutt not found!" >> $LOGF
     exit 1
@@ -26,6 +27,10 @@ elif [[ -f /usr/local/bin/rsync ]]; then
 else
     echo "rsync not found!" >> $LOGF
     exit 1
+fi
+if ! ssh systeminstaller@scnfile02 "mount | grep '/Volumes/whiterabbit'" > /dev/null; then
+    echo "Backup volume not found on remote server!" >> $LOGF
+    exit 1;
 fi
 
 ## Common variables
@@ -41,6 +46,7 @@ VOLS=`mount | $GREP "_edit" | $AWK '{print substr($3, 10)}'` # this list backs u
 
 ## Script it baby!
 echo "Backup started on $HOSTNAME on $TODAY" >> $LOGF
+echo "v$version" >> $LOGF
 echo "" >> $LOGF
 
 ## Self test - check if commands exist
