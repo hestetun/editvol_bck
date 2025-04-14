@@ -44,3 +44,4 @@ Statistics.*
 *.download
 *.aaf
 Unity Attic.bak*
+./Adobe Premiere Pro Auto-Save/*

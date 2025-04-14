@@ -1,4 +1,5 @@
 #!/bin/bash   
+## Created by Ole-Andrè Hestetun
 version="1.5.3"	
 
 ##
