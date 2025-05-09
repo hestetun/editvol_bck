@@ -43,7 +43,7 @@ $MKDIR -p $LOGDIR/editvol_bck # this line creates the directory if it does not e
 LOGF=$LOGDIR/editvol_bck/edit_vol_bck_$TODAY.log
 EXCLUDE_LIST=~/git/editvol_bck/edit_exclude.txt
 EMAIL_ADRESS=scntech@shortcutoslo.no
-VOLS=$(mount | awk '$3 ~ /\/[a-z-]*_edit/ { print substr($3, 10)}') # this list backs up all network disks with the name _edit, and excluding those who dont.
+VOLS=$(mount | awk '$3 ~ /\/.*_edit/ { print substr($3, 10)}') # this list backs up all network disks with the name _edit
 
 ## Script it baby!
 echo "Backup started on $HOSTNAME on $TODAY" >> $LOGF
